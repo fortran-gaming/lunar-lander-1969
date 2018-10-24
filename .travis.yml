@@ -1,0 +1,27 @@
+language: c
+group: travis_latest
+
+git:
+  depth: 3
+  quiet: true
+
+os:
+- linux
+- osx
+
+env: FC=gfortran
+
+addons:
+  apt:
+    packages:
+    - gfortran
+
+before_install:
+- if [[ $TRAVIS_OS_NAME == osx ]]; then
+  brew update > /dev/null;
+  brew install gcc > /dev/null || brew link --overwrite gcc > /dev/null;
+  fi
+
+install: make
+
+script: make test
