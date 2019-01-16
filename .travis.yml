@@ -16,15 +16,6 @@ addons:
 matrix:
   include:
   - os: linux
-    language: python
-    python: 3.7
-    before_install: pip install meson
-    install:
-    - cd build
-    - meson ..
-    - ninja
-    script:
-    - ninja test < $TRAVIS_BUILD_DIR/good.asc
   - os: osx
     before_install: 
     - brew update > /dev/null
