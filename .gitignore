@@ -1,6 +1,7 @@
+
+build/
 lunar
 *.s
-kind.txt
 cmake_install.cmake
 
 CMakeFiles/

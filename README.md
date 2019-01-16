@@ -13,8 +13,19 @@ This game is presented in:
 
 ## Build
 Any Fortran 2008 compliant compiler should work.
+
+### Makefile
+
 ```sh
 make
+```
+
+### Meson
+
+```sh
+cd build
+meson ..
+ninja
 ```
 
 ## Usage

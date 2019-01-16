@@ -1,6 +1,6 @@
 module game
 
-use iso_fortran_env, only: wp=>real64, stdin=>input_unit
+use iso_fortran_env, only: wp=>real64, stdin=>input_unit, stderr=>error_unit
 implicit none
 
 logical :: debug=.false.
@@ -91,8 +91,8 @@ real(wp), intent(in) :: L
 real(wp) :: W
 
 W=3600*Vvel
-PRINT '(a,f7.2,a)', "ON THE MOON AT ",L," SECONDS"
-print '(a,f7.2,a)', "IMPACT VELOCITY OF ",W," MPH"
+PRINT '(a,f12.2,a)', "ON THE MOON AT ",L," SECONDS"
+print '(a,f12.2,a)', "IMPACT VELOCITY OF ",W," MPH"
 
 IF (W<=1.2) THEN
   print *, "PERFECT LANDING!"
@@ -110,10 +110,11 @@ elseif (w<=60) then
   print '(f7.2,f7.2,f12.2)', L, W, Wwet-Wdry
   stop 1
 else
-  PRINT '(a,f7.2,a)', "SORRY THERE WERE NO SURVIVORS. YOU BLEW IT! IN FACT, YOU BLASTED A NEW LUNAR CRATER", &
-        W*0.227_wp," FEET DEEP!"
-  print '(a7,a7,a12)',"SEC","MPH","LB FUEL"
-  print '(f7.2,f7.2,f12.2)', L, W, Wwet-Wdry
+  PRINT *, "SORRY THERE WERE NO SURVIVORS."
+  print *,"YOU BLEW IT! IN FACT, YOU BLASTED A NEW LUNAR CRATER"
+  print '(f12.2,a)', W*0.227_wp," FEET DEEP!"
+  print '(a12,a12,a12)',"SEC","MPH","LB FUEL"
+  print '(f12.2,f12.2,f12.2)', L, W, Wwet-Wdry
   stop 2
 endif
 
@@ -123,11 +124,20 @@ end subroutine landed
 real(wp) function burn(L)
 
 real(wp), intent(in) :: L
+integer :: i
 
 write(*, '(f5.0,i6,i5,f7.0,f12.0, 6x)', advance='no') L, int(altitude), int(5280*modulo(altitude,1._wp)), 3600*Vvel, Wwet-Wdry
 
-read(stdin,*) burn
-if (burn < 0 .or. burn > maxburn) stop 'burn specification not possible.'
+read(stdin,*,iostat=i) burn
+if (i<0) stop 'Landing aborted per user request.'
+
+if (i/=0 .or. burn < 0) then
+  burn = 0
+  write(stderr,'(a,f9.2)') 'burn specification not possiblee, using burnrate',burn 
+elseif(burn > maxburn) then
+  burn = maxburn
+  write(stderr,'(a,f9.2)') 'burn specification not possible, using burnrate',burn
+endif
 
 if (debug) print '(f5.1)', burn
 

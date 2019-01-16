@@ -16,10 +16,20 @@ addons:
 matrix:
   include:
   - os: linux
+    language: python
+    python: 3.7
+    before_install: pip install meson
+    install:
+    - cd build
+    - meson ..
+    - ninja
+    script:
+    - ninja test < $TRAVIS_BUILD_DIR/good.asc
   - os: osx
-    before_install: brew install gcc
+    before_install: 
+    - brew update > /dev/null
+    - brew install gcc > /dev/null
   - os: windows
-    language: sh
     install: mingw32-make
     script: mingw32-make test
 

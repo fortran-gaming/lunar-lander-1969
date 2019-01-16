@@ -1,6 +1,6 @@
 lunar: lunar.f90
 	$(FC) -g $^ -o $@
-	
+
 clean:
 	$(RM) *.mod lunar
 
