@@ -13,11 +13,10 @@ build: off
 init:
 - cmd: set PATH=%MINGW_DIR%;%PATH%
 
-install: 
+install:
 - sh: make
 - cmd: mingw32-make
 
 test_script:
 - sh: make test
 - cmd: mingw32-make test
-
