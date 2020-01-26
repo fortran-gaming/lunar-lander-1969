@@ -1,6 +1,7 @@
-[![Actions Status](https://github.com/fortran-gaming/luner-lander-1969/workflows/fortran_meson/badge.svg)](https://github.com/fortran-gaming/luner-lander-1969/actions)
-
 # Lunar Lander 1969:  BASIC and Fortran
+
+[![Actions Status](https://github.com/fortran-gaming/lunar-lander-1969/workflows/fortran_meson/badge.svg)](https://github.com/fortran-gaming/lunar-lander-1969/actions)
+
 
 * [Jim Storer](http://www.cs.brandeis.edu/~storer/LunarLander/LunarLander.html), fall 1969: PDP-8 FOCAL
 * David H. Ahl, 1973: [BASIC](http://www.cs.brandeis.edu/~storer/LunarLander/LunarLander/Articles/Rocket-101BasicComputerGames.pdf)
@@ -22,6 +23,7 @@ meson test -C build
 ## Usage
 
 The program defaults to stdin from user.
+
 ```sh
 ./build/lunar
 ```
@@ -32,6 +34,7 @@ Options:
 * `-f` specifies initial fuel weight
 
 To mimic the 1969 results
+
 ```sh
 lunar -f 16000 -d < fail.asc
 
@@ -43,6 +46,7 @@ The final output line is formatted for automatic parsing.
 ### BASIC
 
 For reference the 1973 BASIC program from David Ahl may be run with many ANSI BASIC interpreters like:
+
 ```sh
 bwbasic lunar.bas
 ```
