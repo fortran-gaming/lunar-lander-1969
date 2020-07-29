@@ -1,0 +1,19 @@
+name: ci_cmake
+
+on:
+  push:
+    paths:
+      - "**/*.f90"
+      - "**/CMakeLists.txt"
+      - ".github/workflows/ci_cmake.yml"
+
+jobs:
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: ctest -S setup.cmake -VV
+      env:
+        FC: gfortran-9

@@ -1,7 +1,7 @@
 project('Lunar Lander 1969', 'fortran',
   default_options : ['default_library=static', 'buildtype=release'])
 
-lunar = executable('lunar', 'lunar.f90',
+lunar = executable('lunar-lander', 'lunar.f90',
   install: true)
 
 python = find_program('python')
