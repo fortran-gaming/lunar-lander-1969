@@ -13,7 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
-    - run: ctest -S setup.cmake -VV
-      env:
-        FC: gfortran-9
+    - run: cmake -B build
+    - run: cmake --build build
+    - run: ctest --output-on-failure
+      working-directory: build
+
+  windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - run: cmake -B build -G "MinGW Makefiles"
+    - run: cmake --build build
+    - run: ctest --output-on-failure
+      working-directory: build

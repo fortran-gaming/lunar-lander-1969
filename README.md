@@ -12,10 +12,12 @@ This game is presented in:
 * Fortran `lunar.f90` by Michael Hirsch is also given.
 
 ## Build
+
 Any Fortran 2008 compliant compiler should work.
 
 ```sh
-ctest -S setup.cmake -VV
+cmake -B build
+cmake --build build
 ```
 
 ## Usage
