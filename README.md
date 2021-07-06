@@ -1,6 +1,5 @@
 # Lunar Lander 1969:  BASIC and Fortran
 
-![Actions Status](https://github.com/fortran-gaming/lunar-lander-1969/workflows/ci_meson/badge.svg)
 ![Actions Status](https://github.com/fortran-gaming/lunar-lander-1969/workflows/ci_cmake/badge.svg)
 
 * [Jim Storer](http://www.cs.brandeis.edu/~storer/LunarLander/LunarLander.html), fall 1969: PDP-8 FOCAL
