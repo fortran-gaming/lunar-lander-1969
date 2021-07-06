@@ -19,8 +19,7 @@ jobs:
 
     - run: cmake -B build
     - run: cmake --build build
-    - run: ctest --output-on-failure
-      working-directory: build
+    - run: ctest --test-dir build
 
   windows:
     runs-on: windows-latest
@@ -32,5 +31,4 @@ jobs:
 
     - run: cmake -B build -G "MinGW Makefiles"
     - run: cmake --build build
-    - run: ctest --output-on-failure
-      working-directory: build
+    - run: ctest --test-dir build
