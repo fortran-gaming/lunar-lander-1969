@@ -3,7 +3,8 @@ name: ci_cmake
 on:
   push:
     paths:
-      - "**/*.f90"
+      - "**.f90"
+      - "**.cmake"
       - "**/CMakeLists.txt"
       - ".github/workflows/ci_cmake.yml"
 
@@ -12,23 +13,6 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+    - uses: actions/checkout@v3
 
-    - run: cmake -B build
-    - run: cmake --build build
-    - run: ctest --test-dir build
-
-  windows:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - run: cmake -B build -G "MinGW Makefiles"
-    - run: cmake --build build
-    - run: ctest --test-dir build
+    - run: cmake --workflow --preset default
